@@ -67,6 +67,9 @@ void TtlManager::refreshTimer() {
 
   // The time until the next TTL changed, so reset the timer to match the new value.
   last_scheduled_time_ = next_ttl_expiry;
+  if (timer_duration.count() < 0) {
+    timer_duration = std::chrono::milliseconds(0);
+  }
   timer_->enableTimer(timer_duration, nullptr);
 }
 } // namespace Config
